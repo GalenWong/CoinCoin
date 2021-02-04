@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import CoinCoin from './CoinCoin/CoinCoin';
 import Doge from './CoinCoin/Doge';
+import Toast from 'react-native-toast-message';
 
 const Tab = createBottomTabNavigator();
 

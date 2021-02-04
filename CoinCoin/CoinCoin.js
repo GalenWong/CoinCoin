@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 import Doge from './Doge';
 
 const dogeCoinApiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd&include_24hr_change=true';
@@ -20,66 +20,48 @@ export default function CoinCoin() {
   const [price, setPrice] = useState(0);
   const [change, setChange] = useState(0);
 
-
-  const getNewPrice = async () => {
-    const p = await getPriceAndChange();
-    setPrice(p.price);
-    setChange(p.change);
+  const getAndSetData = async () => {
+    const data = await getPriceAndChange();
+    setPrice(data.price);
+    setChange(data.change);
   };
 
-  // reacting to things to reduce calls
+  /* fetching data when component loaded for the first time */
   useEffect(() => {
-    if(numPress >= 5) {
-      console.log('you just cannot wait, can\'t you...');
-      getNewPrice();
-      setNumPress(0);
-    }
-  },[numPress]);
-
-  // on mount
-  useEffect(() => {
-    console.log('asking for the price for the first time...');
-    getNewPrice();
+    getAndSetData();
   }, []);
 
-  // setting off timer and clean up
-  // useEffect(() => {
-  //   console.log('register timer');
-  //   const timerId = setInterval(() => {
-  //     console.log('timer hits! fetching price of doge coin for you...')
-  //     getPriceAndChange();
-  //   }, 1000 * 10);
-  //   return () => {
-  //     console.log('clean up timer');
-  //     clearInterval(timerId);
-  //   };
-  // }, []);
-
-  useFocusEffect(
-    useCallback(() => {
-      console.log('register timer on focus');
-      const timerId = setInterval(() => {
-        console.log('timer hits! fetching price of doge coin for you...')
-        getPriceAndChange();
-      }, 1000 * 10);
-      return () => {
-        console.log('clean up timer');
-        clearInterval(timerId);
-      };
-    }, [])
-  ); 
-
-  // reacting to change
+  /* fetching data when button is clicked 5 times */
   useEffect(() => {
-    console.log('URGENT: price changed');
+    const getSetDataResetNumPress = async () => {
+      await getAndSetData();
+      setNumPress(0);
+    }
+    if (numPress >= 5) {
+      getSetDataResetNumPress();
+    }
+  }, [numPress]);
+
+  /* notifying user when price is updated */
+  useEffect(() => {
+    Toast.show({ text1: 'Doge', text2: 'Price Changed' });
   }, [price]);
+
+  /* calling API every 10 seconds */
+  useEffect(() => {
+    setInterval(() => {
+      getAndSetData();
+    }, 1000*10);
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
+      <Toast ref={(ref) => Toast.setRef(ref)} />
       <Doge numPress={numPress} />
       <Text style={styles.price}>{price}({change.toFixed(2)}%)</Text>
       <Text>Presses: {numPress}</Text>
-      <Button title="STONKS!" onPress={() => { setNumPress(numPress + 1); }}/>
+      <Button title="STONKS!" onPress={() => { setNumPress(numPress + 1); }} />
     </View>
   );
 }
