@@ -36,4 +36,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginBottom: 15,
     },
+    test: {
+        fontSize: 75,
+        fontWeight: "bold",
+        marginBottom: 15,
+    },
 });
