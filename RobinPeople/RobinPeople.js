@@ -7,6 +7,7 @@ const RobinPeople = () => {
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>RobinPeople</Text>
             <View style={styles.priceContainer}>
+                <Text>DOGE</Text>
                 <Text style={styles.price}>$0.00</Text>
                 <MoneyButton title="Update"/>
             </View>
@@ -32,11 +33,6 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     price: {
-        fontSize: 75,
-        fontWeight: "bold",
-        marginBottom: 15,
-    },
-    test: {
         fontSize: 75,
         fontWeight: "bold",
         marginBottom: 15,
