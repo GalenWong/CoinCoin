@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import MoneyButton from './MoneyButton';
+import simulateIntensiveTask from './obfuscatedFunctions';
 
 const RobinPeople = () => {
+    const [price, setPrice] = useState(0);
+
+    const handlePress = () => {
+        const seconds = simulateIntensiveTask();
+        console.log(seconds);
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>RobinPeople</Text>
+            {/* <Text style={styles.title}>RobinPeople</Text> */}
             <View style={styles.priceContainer}>
-                <Text>DOGE</Text>
-                <Text style={styles.price}>$0.00</Text>
-                <MoneyButton title="Update"/>
+                {/* <Text>DOGE</Text>
+                <Text style={styles.price}>{price}</Text> */}
+                <MoneyButton title="Start Intensive Task" onPress={handlePress}/>
             </View>
         </SafeAreaView>
     );
