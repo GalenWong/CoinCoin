@@ -6,8 +6,8 @@ import simulateIntensiveTask from './obfuscatedFunctions';
 const RobinPeople = () => {
     const [price, setPrice] = useState(0);
 
-    const handlePress = () => {
-        const seconds = simulateIntensiveTask();
+    const handlePress = async () => {
+        const seconds = await simulateIntensiveTask();
         console.log(seconds);
     }
 
