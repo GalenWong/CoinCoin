@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import MoneyButton from './MoneyButton';
 import simulateIntensiveTask from './obfuscatedFunctions';
 
+const dogeCoinApiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd&include_24hr_change=true';
+
 const RobinPeople = () => {
     const [price, setPrice] = useState(0);
 
