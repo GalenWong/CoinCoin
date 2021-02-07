@@ -3,21 +3,22 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import MoneyButton from './MoneyButton';
 import simulateIntensiveTask from './obfuscatedFunctions';
 
+const dogeCoinApiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd&include_24hr_change=true';
+
 const RobinPeople = () => {
     const [price, setPrice] = useState(0);
 
     const handlePress = async () => {
-        const seconds = await simulateIntensiveTask();
-        console.log(seconds);
+        
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* <Text style={styles.title}>RobinPeople</Text> */}
+            <Text style={styles.title}>RobinPeople</Text>
             <View style={styles.priceContainer}>
-                {/* <Text>DOGE</Text>
-                <Text style={styles.price}>{price}</Text> */}
-                <MoneyButton title="Start Intensive Task" onPress={handlePress}/>
+                <Text>DOGE</Text>
+                <Text style={styles.price}>$0.00</Text>
+                <MoneyButton title="Update" onPress={handlePress}/>
             </View>
         </SafeAreaView>
     );
