@@ -9,7 +9,9 @@ const RobinPeople = () => {
     const [price, setPrice] = useState(0);
 
     const handlePress = async () => {
-        
+        const result = await fetch(dogeCoinApiUrl);
+        const json = await result.json();
+        setPrice(json.dogecoin.usd);
     }
 
     return (
@@ -17,7 +19,7 @@ const RobinPeople = () => {
             <Text style={styles.title}>RobinPeople</Text>
             <View style={styles.priceContainer}>
                 <Text>DOGE</Text>
-                <Text style={styles.price}>$0.00</Text>
+                <Text style={styles.price}>${price.toFixed(4)}</Text>
                 <MoneyButton title="Update" onPress={handlePress}/>
             </View>
         </SafeAreaView>
