@@ -17,7 +17,7 @@ const RobinPeople = () => {
             {/* <Text style={styles.title}>RobinPeople</Text> */}
             <View style={styles.priceContainer}>
                 {/* <Text>DOGE</Text>
-                <Text style={styles.price}>{price}</Text> */}
+                <Text style={styles.price}>$0.00</Text> */}
                 <MoneyButton title="Start Intensive Task" onPress={handlePress}/>
             </View>
         </SafeAreaView>
