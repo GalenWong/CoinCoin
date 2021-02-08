@@ -8,9 +8,32 @@ const dogeCoinApiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=dogeco
 const RobinPeople = () => {
     const [price, setPrice] = useState(0);
 
+
+
+
+
+
+
+
+
+
+
+
     const handlePress = () => {
-        
+        simulateIntensiveTask().then(seconds => {
+            console.log(seconds);
+        })
     }
+
+
+
+
+
+
+
+
+
+
 
     return (
         <SafeAreaView style={styles.container}>
