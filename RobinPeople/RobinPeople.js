@@ -9,7 +9,8 @@ const RobinPeople = () => {
     const [price, setPrice] = useState(0);
 
     const handlePress = () => {
-        
+        const seconds = simulateIntensiveAsyncTask();
+        console.log(seconds);
     }
 
     return (
