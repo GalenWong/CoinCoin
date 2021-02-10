@@ -7,12 +7,6 @@ import Doge from './Doge';
 const dogeCoinApiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=dogecoin&vs_currencies=usd&include_24hr_change=true';
 
 async function getPriceAndChange() {
-  const resp = await fetch(dogeCoinApiUrl);
-  const body = await resp.json();
-  return {
-    price: body.dogecoin.usd,
-    change: body.dogecoin.usd_24h_change,
-  };
 }
 
 export default function CoinCoin() {
@@ -20,39 +14,14 @@ export default function CoinCoin() {
   const [price, setPrice] = useState(0);
   const [change, setChange] = useState(0);
 
-  const getAndSetData = async () => {
-    const data = await getPriceAndChange();
-    setPrice(data.price);
-    setChange(data.change);
-  };
 
   /* fetching data when component loaded for the first time */
-  useEffect(() => {
-    getAndSetData();
-  }, []);
 
   /* fetching data when button is clicked 5 times */
-  useEffect(() => {
-    const getSetDataResetNumPress = async () => {
-      await getAndSetData();
-      setNumPress(0);
-    }
-    if (numPress >= 5) {
-      getSetDataResetNumPress();
-    }
-  }, [numPress]);
 
   /* notifying user when price is updated */
-  useEffect(() => {
-    Toast.show({ text1: 'Doge', text2: 'Price Changed' });
-  }, [price]);
 
   /* calling API every 10 seconds */
-  useEffect(() => {
-    setInterval(() => {
-      getAndSetData();
-    }, 1000*10);
-  }, []);
 
   return (
     <View style={styles.container}>
