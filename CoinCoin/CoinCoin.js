@@ -20,25 +20,23 @@ export default function CoinCoin() {
   const [price, setPrice] = useState(0);
   const [change, setChange] = useState(0);
 
+
+  /* fetching data when component loaded for the first time */
   const getAndSetData = async () => {
+    console.log('loading the price...');
     const data = await getPriceAndChange();
     setPrice(data.price);
     setChange(data.change);
   };
-
-  /* fetching data when component loaded for the first time */
   useEffect(() => {
     getAndSetData();
   }, []);
 
   /* fetching data when button is clicked 5 times */
   useEffect(() => {
-    const getSetDataResetNumPress = async () => {
-      await getAndSetData();
-      setNumPress(0);
-    }
     if (numPress >= 5) {
-      getSetDataResetNumPress();
+      getAndSetData();
+      setNumPress(0);
     }
   }, [numPress]);
 
@@ -47,11 +45,12 @@ export default function CoinCoin() {
     Toast.show({ text1: 'Doge', text2: 'Price Changed' });
   }, [price]);
 
+
   /* calling API every 10 seconds */
   useEffect(() => {
     setInterval(() => {
       getAndSetData();
-    }, 1000*10);
+    }, 1000 * 5);
   }, []);
 
   return (
